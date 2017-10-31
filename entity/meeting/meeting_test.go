@@ -23,6 +23,7 @@ func TestCreateMeeting(t *testing.T) {
 }
 
 func TestQueryMeeting(t *testing.T) {
+	//测试查询会议
 	err := QueryMeeting(t1, t2)
 	if err != nil {
 		t.Errorf("error:%s", err)
