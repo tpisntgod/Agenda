@@ -8,10 +8,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 )
 
-const userItemsFilePath string = "./Json/UserItems.json"
-const currentUserFilePath string = "./Json/Current.txt"
+var userItemsFilePath string = "src/Agenda-GO/Json/UserItems.json"
+var currentUserFilePath string = "src/Agenda-GO/Json/Current.txt"
 
 type userItem struct {
 	// 用户名字
@@ -26,6 +27,8 @@ type userItem struct {
 
 func init() {
 	// 初始化
+	userItemsFilePath = filepath.Join(os.Getenv("GOPATH"), userItemsFilePath)
+	currentUserFilePath = filepath.Join(os.Getenv("GOPATH"), currentUserFilePath)
 	userItems = make(map[string](userItem))
 	CurrentUser = nil
 	readJSON()
@@ -227,7 +230,7 @@ func readJSON() {
 func writeJSON() {
 	// 写入userItems
 	b1, err1 := json.Marshal(userItems)
-	
+
 	if err1 == nil {
 		if _, err := os.Open(userItemsFilePath); err != nil {
 			os.Create(userItemsFilePath)

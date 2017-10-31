@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"time"
 )
 
@@ -21,7 +22,7 @@ type meeting_records struct {
 var meetings []meeting_records
 var curUser string
 var isFileExist = true
-var writeFilePath = "./Json/MeetingInfo.json"
+var writeFilePath = "src/Agenda-GO/Json/MeetingInfo.json"
 
 //只是判断两个时间段是否overlap
 func checkIfMeetingTimeOverlap(meetingStartTime, meetingEndTime, startTime, endTime time.Time) bool {
@@ -47,7 +48,6 @@ func checkIfMeetingTimeOverlap(meetingStartTime, meetingEndTime, startTime, endT
 func checkIfTwoMeetingTimeOverlap(title string, participator []string, startTime time.Time, endTime time.Time) (int, string) {
 	checkNum := 0
 	var errorInfo string
-	fmt.Println(participator)
 	for i := 0; i < len(meetings); i++ {
 		//先判断两个会议是否时间overlap，然后判断有没有同时参加这两个会议的人
 		if checkIfMeetingTimeOverlap(meetings[i].StartTime, meetings[i].EndTime, startTime, endTime) {
@@ -100,7 +100,6 @@ func CreateMeeting(title string, participator []string, startTime time.Time, end
 //AddMeetingParticipators 增加会议参与者
 func AddMeetingParticipators(title string, participator []string) error {
 	var isMeetingExist = 0
-	fmt.Println(meetings)
 	for i := 0; i < len(meetings); i++ {
 		if meetings[i].Title == title {
 			//添加会议参与者
@@ -202,7 +201,6 @@ func QueryMeeting(startTime time.Time, endTime time.Time) error {
 			if isCurUserInMeeting == 0 {
 				continue
 			}
-			fmt.Println(isOverlap)
 			if isOverlap == 1 {
 				fmt.Println("指定时间范围内找到的所有会议安排")
 				fmt.Println("会议主题：  起始时间：  终止时间：  发起者：  参与者：")
@@ -225,7 +223,6 @@ func QueryMeeting(startTime time.Time, endTime time.Time) error {
 //CancelMeeting 取消会议
 func CancelMeeting(title string) error {
 	isMeetingExist := 0
-	fmt.Println("cancelmeet")
 	for i := 0; i < len(meetings); i++ {
 		if meetings[i].Title == title {
 			isMeetingExist = 1
@@ -312,8 +309,9 @@ func CheckStarttimelessthanEndtime(startTime time.Time, endTime time.Time) bool 
 }
 
 func init() {
+	//根据Current.txt知道当前登录用户
 	curUser = user.GetLogonUsername()
-	fmt.Println("curUser:", curUser)
+	writeFilePath = filepath.Join(os.Getenv("GOPATH"), writeFilePath)
 	_, err2 := os.Stat(writeFilePath)
 	if err2 == nil {
 		data, err := ioutil.ReadFile(writeFilePath)
