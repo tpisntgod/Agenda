@@ -15,10 +15,11 @@
 package cmd
 
 import (
-	"Agenda-GO/entity/meeting"
-	"Agenda-GO/entity/user"
 	"fmt"
 	"os"
+
+	"github.com/tpisntgod/Agenda-GO/entity/meeting"
+	"github.com/tpisntgod/Agenda-GO/entity/user"
 
 	"github.com/spf13/cobra"
 )
