@@ -12,10 +12,12 @@ var meetName = t1.Format("2006-01-02 15:04:05")
 
 func TestCreateMeeting(t *testing.T) {
 	//测试添加会议
+	//时间是当前时间
 	fmt.Println(t1, t2)
 	var parti []string
 	parti = append(parti, "aa")
 	parti = append(parti, "bb")
+	parti = append(parti, "cc")
 	err := CreateMeeting(meetName, parti, t1, t2)
 	if err != nil {
 		t.Errorf("error:%s", err)

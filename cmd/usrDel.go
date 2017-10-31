@@ -17,8 +17,9 @@ package cmd
 import (
 	"fmt"
 	"os"
+
 	"github.com/spf13/cobra"
-	"Agenda-GO/entity/user"
+	"github.com/tpisntgod/Agenda-GO/entity/user"
 )
 
 // usrDelCmd represents the usrDel command
@@ -35,7 +36,7 @@ var usrDelCmd = &cobra.Command{
 			fmt.Println("you have not logined yet.")
 			os.Exit(1)
 		}
-		
+
 		if err := user.DeleteUser(); err != nil {
 			// fmt.Println("error happened.")
 			fmt.Println(err)

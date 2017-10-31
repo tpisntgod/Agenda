@@ -1,7 +1,6 @@
 package meeting
 
 import (
-	"Agenda-GO/entity/user"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -9,6 +8,8 @@ import (
 	"os"
 	"path/filepath"
 	"time"
+
+	"github.com/tpisntgod/Agenda-GO/entity/user"
 )
 
 type meeting_records struct {
@@ -22,7 +23,7 @@ type meeting_records struct {
 var meetings []meeting_records
 var curUser string
 var isFileExist = true
-var writeFilePath = "src/Agenda-GO/Json/MeetingInfo.json"
+var writeFilePath = "src/github.com/tpisntgod/Agenda-GO/Json/MeetingInfo.json"
 
 //只是判断两个时间段是否overlap
 func checkIfMeetingTimeOverlap(meetingStartTime, meetingEndTime, startTime, endTime time.Time) bool {

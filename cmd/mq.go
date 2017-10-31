@@ -17,9 +17,10 @@ package cmd
 import (
 	"fmt"
 	"os"
+
 	"github.com/spf13/cobra"
-	"Agenda-GO/entity/meeting"
-	"Agenda-GO/entity/user"
+	"github.com/tpisntgod/Agenda-GO/entity/meeting"
+	"github.com/tpisntgod/Agenda-GO/entity/user"
 )
 
 // mqCmd represents the mq command
