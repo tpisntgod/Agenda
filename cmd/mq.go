@@ -19,7 +19,7 @@ import (
 	"os"
 	"github.com/spf13/cobra"
 	"Agenda-GO/entity/meeting"
-	"Agenda-GO/user"
+	"Agenda-GO/entity/user"
 )
 
 // mqCmd represents the mq command

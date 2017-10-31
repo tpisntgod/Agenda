@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"os"
 	"github.com/spf13/cobra"
-	"Agenda-GO/user"
+	"Agenda-GO/entity/user"
 )
 
 // usrDelCmd represents the usrDel command
