@@ -11,6 +11,7 @@ var t2 = t1.Add(time.Second)
 var meetName = t1.Format("2006-01-02 15:04:05")
 
 func TestCreateMeeting(t *testing.T) {
+	//测试添加会议
 	fmt.Println(t1, t2)
 	var parti []string
 	parti = append(parti, "aa")
