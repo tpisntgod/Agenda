@@ -11,8 +11,8 @@ import (
 	"path/filepath"
 )
 
-var userItemsFilePath string = "src/github.com/tpisntgod/Agenda-GO/Json/UserItems.json"
-var currentUserFilePath string = "src/github.com/tpisntgod/Agenda-GO/Json/Current.txt"
+var userItemsFilePath string = "src/github.com/tpisntgod/Agenda/Json/UserItems.json"
+var currentUserFilePath string = "src/github.com/tpisntgod/Agenda/Json/Current.txt"
 
 type userItem struct {
 	// 用户名字

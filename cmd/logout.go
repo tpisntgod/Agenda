@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/tpisntgod/Agenda-GO/entity/user"
+	"github.com/tpisntgod/Agenda/entity/user"
 
 	"github.com/spf13/cobra"
 )

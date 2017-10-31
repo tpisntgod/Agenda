@@ -19,7 +19,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/tpisntgod/Agenda-GO/entity/user"
+	"github.com/tpisntgod/Agenda/entity/user"
 )
 
 // usrSchCmd represents the usrSch command
