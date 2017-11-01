@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/tpisntgod/Agenda/entity/mylog"
 	"github.com/tpisntgod/Agenda/entity/user"
 )
 
@@ -94,6 +95,7 @@ func CreateMeeting(title string, participator []string, startTime time.Time, end
 	meetingToAdd.StartTime = startTime
 	meetingToAdd.EndTime = endTime
 	meetings = append(meetings, meetingToAdd)
+	mylog.AddLog(curUser, "CreateMeeting", "", meetingToAdd.String())
 	WriteMeetingInfo()
 	return nil
 }
@@ -123,7 +125,9 @@ func AddMeetingParticipators(title string, participator []string) error {
 				return errors.New(errorInfo)
 			}
 			for j := 0; j < len(participator); j++ {
+				old := meetings[i]
 				meetings[i].Participator = append(meetings[i].Participator, participator[j])
+				mylog.AddLog(curUser, "AddParticipator", old.String(), meetings[i].String())
 			}
 		}
 	}
@@ -137,7 +141,7 @@ func AddMeetingParticipators(title string, participator []string) error {
 //DeleteMeetingParticipators 删除会议参与者
 func DeleteMeetingParticipators(title string, participator []string) error {
 	var isMeetingExist = 0
-	var errorInfo string = "以下想要删除的用户并没有参加该会议\n"
+	var errorInfo = "以下想要删除的用户并没有参加该会议\n"
 	for i := 0; i < len(meetings); i++ {
 		if meetings[i].Title == title {
 			isMeetingExist = 1
@@ -176,7 +180,9 @@ func DeleteMeetingParticipators(title string, participator []string) error {
 			if len(partAfterDelete) == 0 {
 				return CancelMeeting(title)
 			}
+			old := meetings[i]
 			meetings[i].Participator = partAfterDelete
+			mylog.AddLog(curUser, "DeleteParticipator", old.String(), meetings[i].String())
 		}
 	}
 	if isMeetingExist == 0 {
@@ -188,6 +194,7 @@ func DeleteMeetingParticipators(title string, participator []string) error {
 
 //QueryMeeting 查询会议
 func QueryMeeting(startTime time.Time, endTime time.Time) error {
+	mylog.AddLog(curUser, "QueryMeeting", "", "")
 	isOverlap := 0
 	for i := 0; i < len(meetings); i++ {
 		isCurUserInMeeting := 0
@@ -228,6 +235,7 @@ func CancelMeeting(title string) error {
 		if meetings[i].Title == title {
 			isMeetingExist = 1
 			if meetings[i].Host == curUser {
+				mylog.AddLog(curUser, "CancelMeeting", meetings[i].String(), "")
 				meetings = append(meetings[:i], meetings[i+1:]...)
 				break
 			} else {
@@ -260,6 +268,7 @@ func QuitMeeting(title string) error {
 					break
 				}
 			}
+			mylog.AddLog(curUser, "QuitMeeting", meetings[i].String(), "")
 			break
 		}
 	}
@@ -281,6 +290,7 @@ func ClearAllMeeting() {
 			i--
 		}
 	}
+	mylog.AddLog(curUser, "ClearMeeting", "", "")
 	WriteMeetingInfo()
 }
 
@@ -330,4 +340,14 @@ func init() {
 			fmt.Println(errors.New("保存会议信息的文件打开失败"))
 		}
 	}
+}
+
+// to string
+func (m meeting_records) String() string {
+	var outStr = "{Title:" + m.Title + "  Host:" + m.Host + "  Participor:"
+	for _, s := range m.Participator {
+		outStr += s + " "
+	}
+	outStr += " Begin Time:" + m.StartTime.Format("2006-01-02 15:04:05") + "  End Time:" + m.EndTime.Format("2006-01-02 15:04:05") + "}"
+	return outStr
 }
