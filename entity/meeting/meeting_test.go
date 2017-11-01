@@ -31,3 +31,10 @@ func TestQueryMeeting(t *testing.T) {
 		t.Errorf("error:%s", err)
 	}
 }
+
+func TestCancelMeeting(t *testing.T) {
+	err := CancelMeeting(meetName)
+	if err != nil {
+		t.Errorf("error:%s", err)
+	}
+}
