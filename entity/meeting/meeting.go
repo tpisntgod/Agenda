@@ -322,7 +322,8 @@ func CheckStarttimelessthanEndtime(startTime time.Time, endTime time.Time) bool 
 func init() {
 	//根据Current.txt知道当前登录用户
 	curUser = user.GetLogonUsername()
-	writeFilePath = filepath.Join(os.Getenv("GOPATH"), writeFilePath)
+	//writeFilePath = filepath.Join(os.Getenv("GOPATH"), writeFilePath)
+	writeFilePath = filepath.Join(*mylog.GetGOPATH(), writeFilePath)
 	_, err2 := os.Stat(writeFilePath)
 	if err2 == nil {
 		data, err := ioutil.ReadFile(writeFilePath)

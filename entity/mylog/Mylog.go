@@ -4,6 +4,8 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime"
+	"strings"
 	"time"
 )
 
@@ -11,7 +13,24 @@ var logDivPath = "src/github.com/tpisntgod/Agenda/Json/Log/"
 var logFilePath = time.Now().Format("2006-01-02") + ".txt"
 
 func init() {
-	logDivPath = filepath.Join(os.Getenv("GOPATH"), logDivPath)
+	logDivPath = filepath.Join(*GetGOPATH(), logDivPath)
+}
+
+//GetGOPATH 获得用户环境的gopath
+func GetGOPATH() *string {
+	var sp string
+	if runtime.GOOS == "windows" {
+		sp = ";"
+	} else {
+		sp = ":"
+	}
+	goPath := strings.Split(os.Getenv("GOPATH"), sp)
+	for _, v := range goPath {
+		if _, err := os.Stat(filepath.Join(v, "/src/github.com/tpisntgod/Agenda/entity/meeting/meeting.go")); !os.IsNotExist(err) {
+			return &v
+		}
+	}
+	return nil
 }
 
 func getFileHandle() *os.File {

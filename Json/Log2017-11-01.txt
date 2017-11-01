@@ -1,0 +1,12 @@
+[INFO]01:16:46 User:hpz  Command:CreateMeeting
+To:{Title:meet3  Host:hpz  Participor:aa bb hpz  Begin Time:2017-11-28 09:30:00  End Time:2017-11-28 10:30:00}
+[INFO]01:23:05 Command:LogoutUser
+[INFO]01:23:20 User:bb  Command:LoginUser
+[INFO]01:24:09 Command:RegisterUser
+To:{Name:hh  Email:123@126.com  Phone:42592}
+[INFO]01:25:00 User:bb  Command:CreateMeeting
+To:{Title:mee  Host:bb  Participor:aa bb  Begin Time:2017-12-28 09:30:00  End Time:2017-12-28 10:30:00}
+[INFO]01:25:25 User:bb  Command:CancelMeeting
+From:{Title:mee  Host:bb  Participor:aa bb  Begin Time:2017-12-28 09:30:00  End Time:2017-12-28 10:30:00}
+[INFO]01:26:02 User:bb  Command:DeleteUser
+From:{Name:bb  Email:bb@qq.com  Phone:123124}

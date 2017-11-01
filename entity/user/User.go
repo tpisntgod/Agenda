@@ -29,8 +29,8 @@ type userItem struct {
 
 func init() {
 	// 初始化
-	userItemsFilePath = filepath.Join(os.Getenv("GOPATH"), userItemsFilePath)
-	currentUserFilePath = filepath.Join(os.Getenv("GOPATH"), currentUserFilePath)
+	userItemsFilePath = filepath.Join(*mylog.GetGOPATH(), userItemsFilePath)
+	currentUserFilePath = filepath.Join(*mylog.GetGOPATH(), currentUserFilePath)
 	userItems = make(map[string](userItem))
 	CurrentUser = nil
 	readJSON()
