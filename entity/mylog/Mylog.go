@@ -9,8 +9,8 @@ import (
 	"time"
 )
 
-var logDivPath = "src/github.com/tpisntgod/Agenda/Json/Log/"
-var logFilePath = time.Now().Format("2006-01-02") + ".txt"
+var logDivPath = "src/github.com/tpisntgod/Agenda/Log"
+var logFilePath = "/" + time.Now().Format("2006-01-02") + ".txt"
 
 func init() {
 	logDivPath = filepath.Join(*GetGOPATH(), logDivPath)
