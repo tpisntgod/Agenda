@@ -6,16 +6,17 @@
 - 侯培中 15331105
 - 柯永基 15331135
 
+## 项目完成情况
+实现了github上多人协作开发；使用 json 存储 User 和 Meeting 实体，当前用户信息存储在 curUser.txt 中，实现了数据持久化；使用travis进行项目持续集成；添加 log 服务，记录用户的操作过程，以及关键的输出。
+
 ## 项目分工
 
 - 胡子昂
-  1.entity/user 
-  2.log
+  1.整体项目框架的初构建 2.entity/user包的实现  3.log日志的实现
 - 侯培中
-  1.entity/meeting
-  2.travis
+  1.整体项目框架的改进  2.entity/meeting包的实现  3.meeting的test实现  4.使用travis进行项目持续集成
 - 柯永基
-  1.cmd
+  1.cobra项目的创建  2.逻辑层的实现  3.项目总管理
 
 ## 运行
 
