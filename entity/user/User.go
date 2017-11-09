@@ -111,7 +111,7 @@ func LoginUser(name string, password string) error {
 // LogoutUser : 登出用户，如果当前没有用户登录，则返回err
 func LogoutUser() error {
 	if !IsLogin() {
-		return errors.New("ERROR:No registered user")
+		return errors.New("ERROR:No login user")
 	}
 
 	CurrentUser = nil
