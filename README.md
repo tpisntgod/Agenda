@@ -70,9 +70,10 @@
   Use "agenda [command] --help" for more information about a command.
   ```
 
-- 对每个指令，使用$GOPATH/bin/Agenda XX -h查看帮助页面，如下。
+- 对每个指令，使用$GOPATH/bin/Agenda XX -h查看帮助页面，获得命令所需要参数
+  比如，想要知道ap命令的格式，输入$GOPATH/bin/Agenda ap -h，提示中有命令格式等所需信息。
 
-  其中包含：
+  具体信息其中包含：
 
   ​	Example：具体实例（$GOPATH/bin/Agenda ap -ttitle -pPeter -pMarry，意为添加Peter和Marry到名字叫title的会议中）
 
