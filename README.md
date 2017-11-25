@@ -1,6 +1,6 @@
 # Agenda
 
-![Build Status](https://travis-ci.org/tpisntgod/Agenda.svg?branch=master)(https://travis-ci.org/tpisntgod/Agenda)
+[![Build Status](https://travis-ci.org/tpisntgod/Agenda.svg?branch=master)](https://travis-ci.org/tpisntgod/Agenda)
 
 ## Team member
 - 胡子昂 15331111 
@@ -97,6 +97,3 @@
   Global Flags:
         --config string   config file (default is $HOME/.Agenda-GO.yaml)
   ```
-
-
-
