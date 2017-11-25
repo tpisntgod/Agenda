@@ -29,8 +29,8 @@ type userItem struct {
 
 func init() {
 	// 初始化
-	userItemsFilePath = filepath.Join(os.Getenv("GOPATH"), userItemsFilePath)
-	currentUserFilePath = filepath.Join(os.Getenv("GOPATH"), currentUserFilePath)
+	userItemsFilePath = filepath.Join(*mylog.GetGOPATH(), userItemsFilePath)
+	currentUserFilePath = filepath.Join(*mylog.GetGOPATH(), currentUserFilePath)
 	userItems = make(map[string](userItem))
 	CurrentUser = nil
 	readJSON()
@@ -111,7 +111,7 @@ func LoginUser(name string, password string) error {
 // LogoutUser : 登出用户，如果当前没有用户登录，则返回err
 func LogoutUser() error {
 	if !IsLogin() {
-		return errors.New("ERROR:No registered user")
+		return errors.New("ERROR:No login user")
 	}
 
 	CurrentUser = nil

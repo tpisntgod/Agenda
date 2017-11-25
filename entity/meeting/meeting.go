@@ -228,6 +228,45 @@ func QueryMeeting(startTime time.Time, endTime time.Time) error {
 	return nil
 }
 
+//QueryMeetingWebVersion 查询会议
+//这个不是第一次作业的部分，是开发web服务程序作业的函数
+//因为之前没有考虑到web服务的Agenda，所以这里补充了一个函数
+func QueryMeetingWebVersion(startTime time.Time, endTime time.Time) (string, error) {
+	var queryResult string
+	mylog.AddLog(curUser, "QueryMeeting", "", "")
+	isOverlap := 0
+	for i := 0; i < len(meetings); i++ {
+		isCurUserInMeeting := 0
+		if checkIfMeetingTimeOverlap(meetings[i].StartTime, meetings[i].EndTime, startTime, endTime) {
+			for j := 0; j < len(meetings[i].Participator); j++ {
+				if meetings[i].Participator[j] == curUser {
+					isOverlap++
+					isCurUserInMeeting = 1
+					break
+				}
+			}
+			if isCurUserInMeeting == 0 {
+				continue
+			}
+			if isOverlap == 1 {
+				queryResult += "指定时间范围内找到的所有会议安排\n"
+				queryResult += "会议主题：  起始时间：  终止时间：  发起者：  参与者：\n"
+			}
+			startTimeString := meetings[i].StartTime.Format("2006-01-02 15:04:05")
+			endTimeString := meetings[i].EndTime.Format("2006-01-02 15:04:05")
+			queryResult += fmt.Sprintf("%v %v %v 发起者：%v 参与者：", meetings[i].Title, startTimeString, endTimeString, meetings[i].Host)
+			for j := 0; j < len(meetings[i].Participator); j++ {
+				queryResult += fmt.Sprintf("%v ", meetings[i].Participator[j])
+			}
+			queryResult += "\n"
+		}
+	}
+	if isOverlap == 0 {
+		return queryResult, errors.New("此时间段并没有你的会议安排")
+	}
+	return queryResult, nil
+}
+
 //CancelMeeting 取消会议
 func CancelMeeting(title string) error {
 	isMeetingExist := 0
@@ -322,7 +361,8 @@ func CheckStarttimelessthanEndtime(startTime time.Time, endTime time.Time) bool 
 func init() {
 	//根据Current.txt知道当前登录用户
 	curUser = user.GetLogonUsername()
-	writeFilePath = filepath.Join(os.Getenv("GOPATH"), writeFilePath)
+	//writeFilePath = filepath.Join(os.Getenv("GOPATH"), writeFilePath)
+	writeFilePath = filepath.Join(*mylog.GetGOPATH(), writeFilePath)
 	_, err2 := os.Stat(writeFilePath)
 	if err2 == nil {
 		data, err := ioutil.ReadFile(writeFilePath)
